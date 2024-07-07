@@ -1,0 +1,135 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
+
+.container {
+  background-color: rgb(242, 242, 242);
+  border-style: dashed;
+  border-width: 1px;
+  border-color: #b4b4b4;
+  width: 550px;
+  display: flex;
+  border-radius: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+input[type="text"] {
+  width: 400px;
+  height: 30px;
+  border-radius: 20px;
+  text-align: center;
+  border: none;
+  background-color: rgb(249, 251, 254);
+}
+
+button {
+  height: 32px;
+  width: 100px;
+  border-radius: 20px;
+  border: none;
+  color: white;
+  background-color: rgb(42, 151, 240);
+}
+
+button:hover {
+  background-color: rgb(81, 172, 246);
+}
+
+input,
+button {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+.addTaskButton {
+  display: inline-block;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 28px;
+  width: 447px;
+  font-size: 15px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 15px;
+  border-color: rgb(148, 148, 148);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  position: relative;
+  padding-left: 35px;
+  padding-right: 25px;
+}
+
+li .actions {
+  display: flex;
+}
+
+div.delete {
+  color: #252525;
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 3px;
+  right: 5px;
+  background-color: rgb(255, 255, 255);
+  border-color: #252525;
+  border: 1px solid;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
+li .delete:hover {
+  color: #e01717;
+}
+
+.listContainer {
+  display: flex;
+}
+
+.completed {
+  text-decoration: line-through;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 15px;
+  border-color: rgb(255, 255, 255);
+  background-color: rgb(223, 223, 223);
+}
+
+input.completed {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  position: absolute;
+  top: 4px;
+  left: 9px;
+}
