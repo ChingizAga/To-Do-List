@@ -1,37 +1,16 @@
-// document.addEventListener("DOMContentLoaded", () => {
-//   const taskInput = document.getElementById("taskInput");
-//   const addTaskButton = document.getElementById("addTaskButton");
-//   const taskList = document.getElementById("taskList");
-
-//   // Adding/Removing/Toggle Tasks Functions
-
-//   function addTask(taskText) {
-//     const li = document.createElement("li");
-//     li.textContent = taskText;
-
-//     taskList.appendChild(li);
-//   }
-
-//   // Adding Tasks
-//   addTaskButton.addEventListener("click", () => {
-//     const taskText = taskInput.value.trim();
-//     if (taskText) {
-//       addTask(taskText);
-//       taskInput.value = "";
-//     }
-//   });
-// });
-
 document.addEventListener("DOMContentLoaded", () => {
   const taskInput = document.getElementById("taskInput");
   const taskList = document.getElementById("taskList");
   const addTaskButton = document.getElementById("addTaskButton");
+
+  loadTasks();
 
   addTaskButton.addEventListener("click", () => {
     const taskText = taskInput.value.trim();
     if (taskText) {
       addTask(taskText);
       taskInput.value = "";
+      saveTasks();
     }
   });
 
@@ -41,13 +20,17 @@ document.addEventListener("DOMContentLoaded", () => {
       if (taskText) {
         addTask(taskText);
         taskInput.value = "";
+        saveTasks();
       }
     }
   });
 
-  function addTask(taskText) {
+  function addTask(taskText, completed = false) {
     const li = document.createElement("li");
     li.textContent = taskText;
+    if (completed) {
+      li.classList.add("completed");
+    }
     taskList.appendChild(li);
 
     const actions = document.createElement("div");
@@ -61,6 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const completeCheckbox = document.createElement("input");
     completeCheckbox.setAttribute("type", "checkbox");
     completeCheckbox.classList.add("completed");
+    completeCheckbox.checked = completed;
     actions.appendChild(completeCheckbox);
 
     deleteButton.addEventListener("click", () => {
@@ -73,14 +57,31 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         li.classList.remove("completed");
       }
+      saveTasks();
     });
 
-    actions.appendChild(deleteButton);
     li.appendChild(actions);
     taskList.insertBefore(li, taskList.firstChild);
   }
 
   function removeTask(taskElement) {
     taskElement.remove();
+    saveTasks();
+  }
+
+  function saveTasks() {
+    const tasks = [];
+    taskList.querySelectorAll("li").forEach((task) => {
+      tasks.push({
+        text: task.firstChild.textContent.trim(),
+        completed: task.classList.contains("completed"),
+      });
+    });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+
+  function loadTasks() {
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.reverse().forEach((task) => addTask(task.text, task.completed));
   }
 });
